@@ -37,7 +37,7 @@ const DocumentUpload = ({ onUpload, documents }) => {
       const formData = new FormData();
       formData.append('file', file);
       const response = await fetch(
-        (process.env.REACT_APP_API_URL || 'http://localhost:5001') + '/import-file',
+        (process.env.REACT_APP_API_URL || 'http://10.10.9.87:5001') + '/import-file',
         {
           method: 'POST',
           body: formData,
@@ -77,7 +77,7 @@ const DocumentUpload = ({ onUpload, documents }) => {
       const formData = new FormData();
       formData.append('file', file);
       const response = await fetch(
-        (process.env.REACT_APP_API_URL || 'http://localhost:5001') + '/import-file',
+        (process.env.REACT_APP_API_URL || 'http://10.10.9.87:5001') + '/import-file',
         {
           method: 'POST',
           body: formData,

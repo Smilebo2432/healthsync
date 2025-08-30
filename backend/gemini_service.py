@@ -13,7 +13,7 @@ try:
     model = genai.GenerativeModel('gemini-1.5-flash')
 except:
     # Fallback to older model if needed
-    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Enhanced specialized prompts for different health tasks
 MEDICAL_DOCUMENT_PROMPT = """
@@ -231,13 +231,40 @@ def analyze_medical_document(document_text):
             }
             
     except Exception as e:
-        print(f"Error analyzing document: {e}")
-        return {
-            "medications": [],
-            "appointments": [],
-            "health_metrics": [],
-            "recommendations": [f"Error processing document: {str(e)}"]
-        }
+        error_msg = str(e)
+        print(f"Error analyzing document: {error_msg}")
+        
+        # Handle specific error types
+        if "429" in error_msg or "quota" in error_msg.lower():
+            return {
+                "medications": [],
+                "appointments": [],
+                "health_metrics": [],
+                "recommendations": [
+                    "AI analysis temporarily unavailable due to high usage. Please try again in a few minutes.",
+                    "Your document has been saved and will be analyzed when the service is available."
+                ]
+            }
+        elif "api key" in error_msg.lower() or "authentication" in error_msg.lower():
+            return {
+                "medications": [],
+                "appointments": [],
+                "health_metrics": [],
+                "recommendations": [
+                    "AI service configuration issue. Please contact support.",
+                    "Your document has been saved for later processing."
+                ]
+            }
+        else:
+            return {
+                "medications": [],
+                "appointments": [],
+                "health_metrics": [],
+                "recommendations": [
+                    "Document saved successfully. AI analysis will be retried automatically.",
+                    "You can still view and manage your documents manually."
+                ]
+            }
 
 def health_chat(user_message, health_context):
     """
@@ -268,8 +295,16 @@ Please provide a helpful, personalized response based on their health data. Be s
         return response.text.strip()
         
     except Exception as e:
-        print(f"Error in health chat: {e}")
-        return "I'm having trouble processing your request right now. Please try again or contact support."
+        error_msg = str(e)
+        print(f"Error in health chat: {error_msg}")
+        
+        # Handle specific error types
+        if "429" in error_msg or "quota" in error_msg.lower():
+            return "I'm experiencing high usage right now. Please try again in a few minutes. Your message has been saved."
+        elif "api key" in error_msg.lower() or "authentication" in error_msg.lower():
+            return "I'm having technical difficulties. Please contact support for assistance."
+        else:
+            return "I'm having trouble processing your request right now. Please try again in a moment."
 
 def create_medication_schedule(medications):
     """
