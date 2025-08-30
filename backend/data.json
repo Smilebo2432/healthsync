@@ -1,0 +1,113 @@
+{
+  "documents": [
+    {
+      "id": 1,
+      "text": "Prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning. Atorvastatin 20mg once daily in the evening.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": "ongoing",
+            "instructions": "Take with meals",
+            "refill_date": "2024-09-15"
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "Take in the morning",
+            "refill_date": "2024-09-20"
+          },
+          {
+            "name": "Atorvastatin",
+            "dosage": "20mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "Take in the evening",
+            "refill_date": "2024-09-18"
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": [
+          "Monitor blood sugar levels regularly",
+          "Check blood pressure weekly",
+          "Schedule follow-up in 3 months"
+        ]
+      },
+      "uploaded_at": "2024-08-29T21:15:00"
+    }
+  ],
+  "medications": [
+    {
+      "name": "Metformin",
+      "dosage": "500mg",
+      "frequency": "twice daily",
+      "duration": "ongoing",
+      "instructions": "Take with meals",
+      "refill_date": "2024-09-15"
+    },
+    {
+      "name": "Lisinopril",
+      "dosage": "10mg",
+      "frequency": "once daily",
+      "duration": "ongoing",
+      "instructions": "Take in the morning",
+      "refill_date": "2024-09-20"
+    },
+    {
+      "name": "Atorvastatin",
+      "dosage": "20mg",
+      "frequency": "once daily",
+      "duration": "ongoing",
+      "instructions": "Take in the evening",
+      "refill_date": "2024-09-18"
+    }
+  ],
+  "appointments": [
+    {
+      "type": "Follow-up Visit",
+      "doctor": "Dr. Sarah Johnson",
+      "date": "2024-09-15T10:00:00",
+      "reason": "Diabetes management check-up"
+    }
+  ],
+  "health_metrics": [
+    {
+      "metric": "Blood Pressure",
+      "value": "135/85",
+      "date": "2024-08-28",
+      "status": "slightly elevated"
+    },
+    {
+      "metric": "Blood Sugar (Fasting)",
+      "value": "120 mg/dL",
+      "date": "2024-08-28",
+      "status": "controlled"
+    }
+  ],
+  "recommendations": [
+    "Monitor blood sugar levels regularly",
+    "Check blood pressure weekly",
+    "Schedule follow-up in 3 months",
+    "Continue daily exercise routine",
+    "Maintain low-sodium diet"
+  ],
+  "chat_history": [
+    {
+      "id": 1,
+      "user_message": "When should I take my blood pressure medication?",
+      "ai_response": "Based on your prescription, you should take Lisinopril 10mg once daily in the morning. It's best to take it at the same time each day to maintain consistent blood pressure control. Since you're also taking Metformin twice daily with meals, you might want to take the Lisinopril with your breakfast to establish a routine.",
+      "timestamp": "2024-08-29T21:10:00"
+    },
+    {
+      "id": 2,
+      "user_message": "What exercises are safe for my condition?",
+      "ai_response": "Great question! With diabetes and slightly elevated blood pressure, low-impact exercises are excellent choices. Walking for 30 minutes daily, swimming, and gentle yoga are all safe and beneficial. These activities help control blood sugar, lower blood pressure, and improve circulation. Start with 10-15 minutes and gradually increase. Remember to check your blood sugar before and after exercise, and stay hydrated!",
+      "timestamp": "2024-08-29T21:12:00"
+    }
+  ]
+}
