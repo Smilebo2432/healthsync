@@ -2,6 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, MessageCircle, Sparkles } from 'lucide-react';
 import { sendChatMessage } from '../utils/api';
 
+// Helper to render *italic*, **bold**, ***bold and italic***
+const renderFormattedMessage = (text) => {
+  let html = text
+    .replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  return { __html: html };
+};
+
 const ChatBot = ({ onMessage, history, healthContext }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -177,7 +186,7 @@ const ChatBot = ({ onMessage, history, healthContext }) => {
                         <User className="w-4 h-4 mr-2 mt-1 text-white flex-shrink-0" />
                       )}
                       <div className="flex-1">
-                        <p className="text-sm">{message.content}</p>
+                        <p className="text-sm" dangerouslySetInnerHTML={renderFormattedMessage(message.content)} />
                         <p className={`text-xs mt-1 ${
                           message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
                         }`}>

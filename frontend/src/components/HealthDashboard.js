@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Pill, Activity, Clock, RefreshCw, Plus, TrendingUp, TrendingDown } from 'lucide-react';
 import { syncCalendar } from '../utils/api';
+import HealthInsights from './HealthInsights';
 
 const HealthDashboard = ({ medications, appointments, healthMetrics, recommendations, onCalendarSync }) => {
   const [syncing, setSyncing] = useState(false);
@@ -13,10 +14,11 @@ const HealthDashboard = ({ medications, appointments, healthMetrics, recommendat
 
       const result = await syncCalendar();
       
-      if (result.success) {
+      
+      if (result.success || result.events_created > 0) {
         setSyncStatus({
           type: 'success',
-          message: `Successfully created ${result.events_created} calendar events!`
+          message: `Successfully created ${result.events_created || 0} calendar events!`
         });
         
         if (onCalendarSync) {
@@ -25,7 +27,7 @@ const HealthDashboard = ({ medications, appointments, healthMetrics, recommendat
       } else {
         setSyncStatus({
           type: 'error',
-          message: `Error syncing calendar: ${result.error}`
+          message: `Error syncing calendar: ${result.error || 'Unknown error'}`
         });
       }
     } catch (error) {
@@ -243,6 +245,18 @@ const HealthDashboard = ({ medications, appointments, healthMetrics, recommendat
             </div>
           )}
         </div>
+      </div>
+
+      {/* AI Health Insights */}
+      <div className="max-w-4xl mx-auto">
+        <HealthInsights 
+          healthData={{
+            medications,
+            appointments,
+            health_metrics: healthMetrics,
+            recommendations
+          }}
+        />
       </div>
 
       {/* Recommendations */}

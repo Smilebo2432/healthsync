@@ -7,6 +7,7 @@ const DocumentUpload = ({ onUpload, documents }) => {
   const [uploading, setUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(null);
   const [documentText, setDocumentText] = useState('');
+  const fileInputRef = React.useRef();
 
   const handleDragOver = useCallback((e) => {
     e.preventDefault();
@@ -30,13 +31,76 @@ const DocumentUpload = ({ onUpload, documents }) => {
 
   const handleFileUpload = async (file) => {
     if (!file) return;
+    setUploading(true);
+    setUploadStatus(null);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch(
+        (process.env.REACT_APP_API_URL || 'http://localhost:5001') + '/import-file',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      setUploadStatus({
+        type: 'success',
+        message: `File analyzed successfully! Found ${result.analysis.medications?.length || 0} medications.`
+      });
+      if (onUpload) onUpload(result);
+    } catch (error) {
+      setUploadStatus({
+        type: 'error',
+        message: `Error analyzing file: ${error.message}`
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
 
-    // For MVP, we'll use a text input instead of file processing
-    // In production, implement file reading and OCR
-    setUploadStatus({
-      type: 'info',
-      message: 'File uploaded successfully! Please paste the document text below for AI analysis.'
-    });
+  const handleFileButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    setUploadStatus(null);
+    try {
+      // Prepare form data for /import-file endpoint
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch(
+        (process.env.REACT_APP_API_URL || 'http://localhost:5001') + '/import-file',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      setUploadStatus({
+        type: 'success',
+        message: `File analyzed successfully! Found ${result.analysis.medications?.length || 0} medications.`
+      });
+      if (onUpload) onUpload(result);
+    } catch (error) {
+      setUploadStatus({
+        type: 'error',
+        message: `Error analyzing file: ${error.message}`
+      });
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleTextSubmit = async () => {
@@ -119,9 +183,16 @@ const DocumentUpload = ({ onUpload, documents }) => {
           <p className="text-gray-500 mb-4">
             Or click to browse files (PDF, images, text)
           </p>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors" onClick={handleFileButtonClick} disabled={uploading}>
             Choose Files
           </button>
+          <input
+            type="file"
+            accept=".pdf,image/*,text/plain"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
         </div>
       </div>
 
@@ -195,7 +266,7 @@ const DocumentUpload = ({ onUpload, documents }) => {
                 </div>
               </div>
             ))}
-          </div>
+          </div>  
         </div>
       )}
 

@@ -3,11 +3,43 @@ from flask_cors import CORS
 import json
 import os
 from datetime import datetime
-from gemini_service import analyze_medical_document, health_chat, create_medication_schedule
+from gemini_service import analyze_medical_document, health_chat, create_medication_schedule, generate_health_insights, test_gemini_connection
 from calendar_service import sync_to_google_calendar
+from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+from supabase import create_client, Client
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=['http://10.10.9.87:3000', 'http://localhost:3000', 'http://127.0.0.1:3000'])
+
+# Initialize Supabase client
+supabase_url = os.getenv('SUPABASE_URL')
+supabase_key = os.getenv('SUPABASE_SERVICE_KEY')
+supabase: Client = create_client(supabase_url, supabase_key) if supabase_url and supabase_key else None
+
+# Authentication middleware
+def authenticate_user():
+    """Extract and verify user from request headers"""
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return None
+    
+    token = auth_header.split(' ')[1]
+    
+    if not supabase:
+        # For development without Supabase
+        return {'id': 'dev-user', 'email': 'dev@example.com'}
+    
+    try:
+        # Verify the JWT token with Supabase
+        user = supabase.auth.get_user(token)
+        return user.user
+    except Exception as e:
+        print(f"Authentication error: {e}")
+        return None
 
 # Load existing health data
 def load_health_data():
@@ -31,11 +63,23 @@ def save_health_data(data):
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({"status": "healthy", "message": "HealthSync AI is running!"})
+    # Test Gemini connection
+    gemini_status = test_gemini_connection()
+    return jsonify({
+        "status": "healthy", 
+        "message": "HealthSync AI is running!",
+        "gemini_status": "connected" if gemini_status else "disconnected"
+    })
 
 @app.route('/upload', methods=['POST'])
 def upload_document():
     try:
+        # Authenticate user (optional for development)
+        user = authenticate_user()
+        if not user:
+            # For development, use a default user
+            user = {'id': 'dev-user', 'email': 'dev@example.com'}
+        
         # Get the document text from the request
         data = request.get_json()
         document_text = data.get('text', '')
@@ -54,23 +98,23 @@ def upload_document():
             "id": len(health_data["documents"]) + 1,
             "text": document_text,
             "analysis": analysis_result,
-            "uploaded_at": datetime.now().isoformat()
+            "uploaded_at": datetime.now().isoformat(),
+            "user_id": user.get('id')
         }
         
         health_data["documents"].append(new_document)
         
-        # Update medications, appointments, etc. from analysis
-        if "medications" in analysis_result:
-            health_data["medications"].extend(analysis_result["medications"])
-        
-        if "appointments" in analysis_result:
-            health_data["appointments"].extend(analysis_result["appointments"])
-            
-        if "health_metrics" in analysis_result:
-            health_data["health_metrics"].extend(analysis_result["health_metrics"])
-            
-        if "recommendations" in analysis_result:
-            health_data["recommendations"].extend(analysis_result["recommendations"])
+        # Update medications, appointments, etc. from analysis, avoiding duplicates
+        def add_unique_items(key):
+            if key in analysis_result:
+                for item in analysis_result[key]:
+                    if item not in health_data[key]:
+                        health_data[key].append(item)
+
+        add_unique_items("medications")
+        add_unique_items("appointments")
+        add_unique_items("health_metrics")
+        add_unique_items("recommendations")
         
         # Save updated data
         save_health_data(health_data)
@@ -81,6 +125,54 @@ def upload_document():
             "document_id": new_document["id"]
         })
         
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/import-file', methods=['POST'])
+def import_file():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part in the request'}), 400
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+        filename = secure_filename(file.filename)
+        file_ext = os.path.splitext(filename)[1].lower()
+        # Save file temporarily
+        temp_path = os.path.join('/tmp', filename)
+        file.save(temp_path)
+        # For now, only support image files (extend to PDF as needed)
+        with open(temp_path, 'rb') as f:
+            image_data = f.read()
+        from gemini_service import extract_text_from_image
+        document_text = extract_text_from_image(image_data)
+        # Analyze the extracted text
+        analysis_result = analyze_medical_document(document_text)
+        # Load and update health data
+        health_data = load_health_data()
+        new_document = {
+            "id": len(health_data["documents"]) + 1,
+            "text": document_text,
+            "analysis": analysis_result,
+            "uploaded_at": datetime.now().isoformat()
+        }
+        health_data["documents"].append(new_document)
+        def add_unique_items(key):
+            if key in analysis_result:
+                for item in analysis_result[key]:
+                    if item not in health_data[key]:
+                        health_data[key].append(item)
+        add_unique_items("medications")
+        add_unique_items("appointments")
+        add_unique_items("health_metrics")
+        add_unique_items("recommendations")
+        save_health_data(health_data)
+        os.remove(temp_path)
+        return jsonify({
+            "message": "File imported and analyzed successfully",
+            "analysis": analysis_result,
+            "document_id": new_document["id"]
+        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -161,5 +253,25 @@ def get_chat_history():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/health-insights', methods=['POST'])
+def get_health_insights():
+    try:
+        # Authenticate user (optional for development)
+        user = authenticate_user()
+        if not user:
+            # For development, use a default user
+            user = {'id': 'dev-user', 'email': 'dev@example.com'}
+        
+        # Get health data
+        health_data = load_health_data()
+        
+        # Generate insights using Gemini AI
+        insights = generate_health_insights(health_data)
+        
+        return jsonify(insights)
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)

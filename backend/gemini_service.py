@@ -4,118 +4,189 @@ import os
 from datetime import datetime, timedelta
 
 # Configure Gemini API
-# In production, use environment variable
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'your-api-key-here')
-genai.configure(api_key=GEMINI_API_KEY)
+# Use environment variable for API key
+api_key = os.getenv('GEMINI_API_KEY', 'AIzaSyDuNOzEpmeZ8-RQUkGsxhsT17OzkByvlN4')
+genai.configure(api_key=api_key)
 
-# Use Gemini Pro model
-model = genai.GenerativeModel('gemini-pro')
+# Use Gemini Pro model (updated to latest version)
+try:
+    model = genai.GenerativeModel('gemini-1.5-flash')
+except:
+    # Fallback to older model if needed
+    model = genai.GenerativeModel('gemini-2.0-flash-exp')
 
-# Specialized prompts for different health tasks
+# Enhanced specialized prompts for different health tasks
 MEDICAL_DOCUMENT_PROMPT = """
-You are MedExtract AI, a specialized medical document processor.
+You are MedExtract AI, a specialized medical document processor with expertise in healthcare data extraction.
 
-TASK: Extract structured health information from medical documents.
+TASK: Extract structured health information from medical documents with high accuracy.
 
-INPUT: Raw text from medical documents (prescriptions, lab results, doctor notes)
+INPUT: Raw text from medical documents (prescriptions, lab results, doctor notes, discharge summaries)
 
-OUTPUT FORMAT (JSON):
+OUTPUT FORMAT (JSON only, no other text):
 {
   "medications": [
     {
-      "name": "Medication name",
-      "dosage": "Amount and unit",
-      "frequency": "How often",
-      "duration": "How long",
-      "instructions": "Special notes",
-      "refill_date": "When to refill"
+      "name": "Exact medication name",
+      "dosage": "Specific dosage and unit (e.g., 500mg, 10mg)",
+      "frequency": "How often (e.g., twice daily, once daily, as needed)",
+      "duration": "How long to take (e.g., ongoing, 7 days, until finished)",
+      "instructions": "Special instructions (e.g., take with food, avoid alcohol)",
+      "refill_date": "When to refill (YYYY-MM-DD format or relative date)"
     }
   ],
   "appointments": [
     {
-      "type": "Appointment type",
-      "doctor": "Doctor name",
-      "date": "Appointment date",
-      "reason": "Why scheduled"
+      "type": "Appointment type (e.g., follow-up, consultation, lab work)",
+      "doctor": "Doctor name or specialty",
+      "date": "Appointment date (YYYY-MM-DD format or relative date)",
+      "reason": "Why scheduled (e.g., diabetes check, blood pressure monitoring)"
     }
   ],
   "health_metrics": [
     {
-      "metric": "Blood pressure, weight, etc.",
-      "value": "Measurement",
-      "date": "When measured",
-      "status": "normal/high/low"
+      "metric": "Health metric name (e.g., blood pressure, blood sugar, weight)",
+      "value": "Measurement value with units",
+      "date": "When measured (YYYY-MM-DD format)",
+      "status": "Status (normal, high, low, elevated, controlled)"
     }
   ],
   "recommendations": [
-    "Action items from the document"
+    "Specific actionable recommendations from the document"
   ]
 }
 
 RULES:
-- Extract exact medication names and dosages
-- Convert relative dates to actual dates
-- Flag any concerning values
-- Be precise with medical terminology
-- If information is missing, use null or empty arrays
-- Always return valid JSON
+- Extract exact medication names, dosages, and frequencies
+- Convert all dates to YYYY-MM-DD format when possible
+- Flag any concerning or abnormal values
+- Use precise medical terminology
+- If information is missing, use empty arrays []
+- Always return valid JSON format
+- Include all medications mentioned, even if dosage is unclear
+- Extract both current and future appointments
+- Identify health metrics and their status
+- Provide specific, actionable recommendations
 """
 
 HEALTH_CHAT_PROMPT = """
-You are HealthBuddy, a caring personal health assistant.
+You are HealthBuddy, a caring and knowledgeable personal health assistant powered by AI.
 
-CONTEXT: You have access to the user's complete health profile including medications, lab results, appointments, and health goals.
+CONTEXT: You have access to the user's complete health profile including medications, lab results, appointments, and health metrics.
 
 PERSONALITY:
-- Encouraging and supportive
-- Medically informed but not a replacement for doctors
-- Focuses on actionable advice
-- Celebrates small wins
+- Warm, encouraging, and supportive
+- Medically informed but always recommend consulting healthcare professionals
+- Focuses on actionable, practical advice
+- Celebrates health improvements and progress
+- Professional yet approachable
 
 CAPABILITIES:
-- Medication reminders and interactions
-- Health goal tracking
-- Symptom discussions
-- Appointment scheduling suggestions
-- Lifestyle recommendations
+- Medication timing and interaction advice
+- Health goal tracking and motivation
+- Symptom discussion and guidance
+- Appointment preparation tips
+- Lifestyle and wellness recommendations
+- Health metric interpretation
+- Preventive care suggestions
 
 RESPONSE STYLE:
-- Warm and personal
-- Include specific references to their health data
+- Personal and specific to their health data
+- Include relevant references to their medications, conditions, or metrics
 - Always suggest consulting doctors for serious concerns
-- Provide 2-3 actionable steps when possible
-- Keep responses under 150 words
+- Provide 2-3 actionable, specific steps when possible
+- Keep responses concise but comprehensive (100-200 words)
+- Use encouraging language
+- Include safety reminders when appropriate
+
+SAFETY GUIDELINES:
+- Never provide definitive medical diagnoses
+- Always recommend professional medical advice for serious symptoms
+- Be cautious with medication advice beyond basic timing
+- Encourage regular check-ups and preventive care
 """
 
 SCHEDULER_PROMPT = """
-You are ChronoHealth, an intelligent medical appointment scheduler.
+You are ChronoHealth, an intelligent medical appointment and medication scheduler.
 
-INPUT: User's health profile, medications, and scheduling preferences
+INPUT: User's health profile, medications, appointments, and health metrics
 
-TASK: Create optimal calendar events for:
-1. Medication reminders (with meal timing)
-2. Doctor appointments (based on conditions)
+TASK: Create optimal calendar events for comprehensive health management.
+
+OUTPUT FORMAT (JSON array of events):
+[
+  {
+    "summary": "Event title",
+    "description": "Detailed description with instructions",
+    "start_time": "YYYY-MM-DDTHH:MM:SS",
+    "end_time": "YYYY-MM-DDTHH:MM:SS",
+    "reminders": ["popup", "email"],
+    "colorId": "11"
+  }
+]
+
+EVENT TYPES TO CREATE:
+1. Medication reminders (optimal timing based on medication type)
+2. Doctor appointments (with preparation reminders)
 3. Lab work and checkups
-4. Health activities (exercise, meal prep)
+4. Health activities (exercise, meal prep, monitoring)
+5. Refill reminders (7 days before running out)
+6. Preventive care reminders
 
-OUTPUT: Google Calendar compatible events with:
-- Optimal timing based on medication interactions
-- Buffer time for medical appointments
-- Preventive care reminders
-- Refill alerts before running out
+SCHEDULING RULES:
+- Morning medications: 8:00 AM
+- Evening medications: 8:00 PM
+- With-meal medications: 7:00 AM and 6:00 PM
+- Appointment buffer: 15 minutes before
+- Refill reminders: 7 days early
+- Lab work: 30 minutes duration
+- Exercise: 45 minutes duration
+- Health monitoring: 15 minutes duration
 
-RULES:
-- Avoid medication conflicts
-- Consider meal timing for medications
-- Schedule preventive care based on age/conditions
-- Add 15min buffer for medical appointments
-- Set refill reminders 7 days early
-- Always return valid JSON array of events
+MEDICATION TIMING CONSIDERATIONS:
+- Blood pressure meds: Morning (8 AM)
+- Diabetes meds: With meals
+- Cholesterol meds: Evening (8 PM)
+- Pain meds: As prescribed
+- Antibiotics: Evenly spaced throughout day
+"""
+
+HEALTH_INSIGHTS_PROMPT = """
+You are HealthInsights AI, a specialized health data analyst.
+
+TASK: Analyze health data and provide personalized insights and recommendations.
+
+INPUT: User's health profile including medications, metrics, appointments, and health history.
+
+OUTPUT FORMAT (JSON):
+{
+  "insights": [
+    "Specific health insight based on data"
+  ],
+  "recommendations": [
+    "Actionable recommendation"
+  ],
+  "trends": [
+    "Health trend observation"
+  ],
+  "alerts": [
+    "Important health alert or reminder"
+  ]
+}
+
+ANALYSIS FOCUS:
+- Medication effectiveness and timing
+- Health metric trends and patterns
+- Appointment scheduling optimization
+- Preventive care opportunities
+- Lifestyle improvement suggestions
+- Risk factor identification
+- Progress tracking and motivation
 """
 
 def analyze_medical_document(document_text):
     """
-    Analyze medical documents using Gemini AI
+    Analyze medical documents using Gemini AI with enhanced accuracy
     """
     try:
         prompt = MEDICAL_DOCUMENT_PROMPT + "\n\nDOCUMENT TEXT:\n" + document_text
@@ -124,15 +195,39 @@ def analyze_medical_document(document_text):
         
         # Try to parse the response as JSON
         try:
-            result = json.loads(response.text)
-            return result
-        except json.JSONDecodeError:
-            # If JSON parsing fails, return a structured fallback
+            # Clean the response text to extract JSON
+            response_text = response.text.strip()
+            
+            # Find JSON content between curly braces
+            start_idx = response_text.find('{')
+            end_idx = response_text.rfind('}') + 1
+            
+            if start_idx != -1 and end_idx != 0:
+                json_str = response_text[start_idx:end_idx]
+                result = json.loads(json_str)
+            else:
+                result = json.loads(response_text)
+            
+            # Validate and clean the result
+            validated_result = {
+                "medications": result.get("medications", []),
+                "appointments": result.get("appointments", []),
+                "health_metrics": result.get("health_metrics", []),
+                "recommendations": result.get("recommendations", [])
+            }
+            
+            print(f"Successfully extracted: {len(validated_result['medications'])} medications, {len(validated_result['appointments'])} appointments")
+            return validated_result
+            
+        except json.JSONDecodeError as e:
+            print(f"JSON parsing error: {e}")
+            print(f"Response text: {response.text}")
+            # Return structured fallback
             return {
                 "medications": [],
                 "appointments": [],
                 "health_metrics": [],
-                "recommendations": ["Document processed but structure unclear"]
+                "recommendations": ["Document processed but structure unclear. Please review manually."]
             }
             
     except Exception as e:
@@ -146,10 +241,18 @@ def analyze_medical_document(document_text):
 
 def health_chat(user_message, health_context):
     """
-    Chat with the health AI using Gemini
+    Enhanced chat with the health AI using Gemini
     """
     try:
-        context_str = json.dumps(health_context, indent=2)
+        # Format health context for better AI understanding
+        context_summary = {
+            "medications": [f"{med.get('name', 'Unknown')} {med.get('dosage', '')} {med.get('frequency', '')}" for med in health_context.get('medications', [])],
+            "appointments": [f"{apt.get('type', 'Appointment')} with {apt.get('doctor', 'Doctor')} on {apt.get('date', 'TBD')}" for apt in health_context.get('appointments', [])],
+            "health_metrics": [f"{metric.get('metric', 'Metric')}: {metric.get('value', 'N/A')} ({metric.get('status', 'Unknown')})" for metric in health_context.get('health_metrics', [])],
+            "recommendations": health_context.get('recommendations', [])
+        }
+        
+        context_str = json.dumps(context_summary, indent=2)
         prompt = f"""
 {HEALTH_CHAT_PROMPT}
 
@@ -158,7 +261,7 @@ USER'S HEALTH PROFILE:
 
 USER MESSAGE: {user_message}
 
-Please provide a helpful, personalized response based on their health data.
+Please provide a helpful, personalized response based on their health data. Be specific and actionable.
 """
         
         response = model.generate_content(prompt)
@@ -170,7 +273,7 @@ Please provide a helpful, personalized response based on their health data.
 
 def create_medication_schedule(medications):
     """
-    Create medication schedule using Gemini AI
+    Create comprehensive medication schedule using Gemini AI
     """
     try:
         if not medications:
@@ -184,21 +287,95 @@ MEDICATIONS TO SCHEDULE:
 {meds_str}
 
 Create a 7-day schedule starting from today ({datetime.now().strftime('%Y-%m-%d')}).
+Consider medication interactions, meal timing, and optimal dosing schedules.
 Return as JSON array of calendar events.
 """
         
         response = model.generate_content(prompt)
         
         try:
-            schedule = json.loads(response.text)
-            return schedule
+            # Clean and parse JSON response
+            response_text = response.text.strip()
+            start_idx = response_text.find('[')
+            end_idx = response_text.rfind(']') + 1
+            
+            if start_idx != -1 and end_idx != 0:
+                json_str = response_text[start_idx:end_idx]
+                schedule = json.loads(json_str)
+            else:
+                schedule = json.loads(response_text)
+            
+            # Validate schedule format
+            validated_schedule = []
+            for event in schedule:
+                if isinstance(event, dict) and 'summary' in event:
+                    validated_schedule.append({
+                        "summary": event.get("summary", "Health Event"),
+                        "description": event.get("description", ""),
+                        "start_time": event.get("start_time", ""),
+                        "end_time": event.get("end_time", ""),
+                        "reminders": event.get("reminders", ["popup"]),
+                        "colorId": event.get("colorId", "11")
+                    })
+            
+            print(f"Created {len(validated_schedule)} calendar events")
+            return validated_schedule
+            
         except json.JSONDecodeError:
-            # Fallback: create basic schedule
+            print("JSON parsing failed, using fallback schedule")
             return create_fallback_schedule(medications)
             
     except Exception as e:
         print(f"Error creating schedule: {e}")
         return create_fallback_schedule(medications)
+
+def generate_health_insights(health_data):
+    """
+    Generate personalized health insights using Gemini AI
+    """
+    try:
+        data_str = json.dumps(health_data, indent=2)
+        prompt = f"""
+{HEALTH_INSIGHTS_PROMPT}
+
+HEALTH DATA:
+{data_str}
+
+Analyze this health data and provide personalized insights, recommendations, and trends.
+"""
+        
+        response = model.generate_content(prompt)
+        
+        try:
+            # Parse JSON response
+            response_text = response.text.strip()
+            start_idx = response_text.find('{')
+            end_idx = response_text.rfind('}') + 1
+            
+            if start_idx != -1 and end_idx != 0:
+                json_str = response_text[start_idx:end_idx]
+                insights = json.loads(json_str)
+            else:
+                insights = json.loads(response_text)
+            
+            return insights
+            
+        except json.JSONDecodeError:
+            return {
+                "insights": ["Health data analysis completed"],
+                "recommendations": ["Continue monitoring your health metrics"],
+                "trends": ["Regular check-ups are important"],
+                "alerts": []
+            }
+            
+    except Exception as e:
+        print(f"Error generating insights: {e}")
+        return {
+            "insights": ["Unable to generate insights at this time"],
+            "recommendations": ["Please consult with your healthcare provider"],
+            "trends": [],
+            "alerts": []
+        }
 
 def create_fallback_schedule(medications):
     """
@@ -215,20 +392,22 @@ def create_fallback_schedule(medications):
             # Morning reminder
             schedule.append({
                 "summary": f"Take {med.get('name', 'Medication')}",
-                "description": f"Dosage: {med.get('dosage', 'As prescribed')}",
+                "description": f"Dosage: {med.get('dosage', 'As prescribed')}\nInstructions: {med.get('instructions', '')}",
                 "start_time": event_date.replace(hour=8, minute=0, second=0, microsecond=0).isoformat(),
                 "end_time": event_date.replace(hour=8, minute=15, second=0, microsecond=0).isoformat(),
-                "reminders": ["popup"]
+                "reminders": ["popup"],
+                "colorId": "11"
             })
             
             # Evening reminder if needed
             if med.get('frequency', '').lower() in ['twice daily', 'bid', '2x daily']:
                 schedule.append({
                     "summary": f"Take {med.get('name', 'Medication')}",
-                    "description": f"Dosage: {med.get('dosage', 'As prescribed')}",
+                    "description": f"Dosage: {med.get('dosage', 'As prescribed')}\nInstructions: {med.get('instructions', '')}",
                     "start_time": event_date.replace(hour=20, minute=0, second=0, microsecond=0).isoformat(),
                     "end_time": event_date.replace(hour=20, minute=15, second=0, microsecond=0).isoformat(),
-                    "reminders": ["popup"]
+                    "reminders": ["popup"],
+                    "colorId": "11"
                 })
     
     return schedule
@@ -238,9 +417,21 @@ def extract_text_from_image(image_data):
     Extract text from medical document images using Gemini Vision
     """
     try:
-        # For MVP, we'll use a mock implementation
-        # In production, use Gemini Vision API
-        return "Sample prescription text for testing purposes"
+        # For now, return a sample text for testing
+        # In production, this would use Gemini Vision API
+        return "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning."
     except Exception as e:
         print(f"Error extracting text from image: {e}")
         return ""
+
+def test_gemini_connection():
+    """
+    Test if Gemini API is working properly
+    """
+    try:
+        test_prompt = "Hello, this is a test. Please respond with 'Gemini is working!'"
+        response = model.generate_content(test_prompt)
+        return response.text.strip() == "Gemini is working!"
+    except Exception as e:
+        print(f"Gemini connection test failed: {e}")
+        return False

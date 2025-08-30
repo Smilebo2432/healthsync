@@ -1,209 +1,222 @@
-# HealthSync AI - AI-Powered Health Assistant
+# HealthSync AI - Your AI-Powered Health Companion
 
-An intelligent health management application that uses Google Gemini AI to read medical documents, manage medications, and automatically sync everything to your Google Calendar.
+HealthSync AI is an intelligent health assistant that helps you manage medications, appointments, and health data using Google Gemini AI and Supabase authentication.
 
-## 🚀 Features
+## Features
 
-- **AI Document Analysis**: Upload prescriptions, lab results, and doctor notes for instant AI-powered extraction
-- **Smart Medication Management**: Track dosages, frequencies, and refill dates with intelligent reminders
-- **Calendar Integration**: Automatically sync medications and appointments to Google Calendar
-- **Personalized Health Chat**: AI-powered health assistant that knows your medical history
-- **Health Dashboard**: Comprehensive view of your medications, appointments, and health metrics
+- 🔐 **Secure Authentication**: User registration and login with Supabase
+- 🤖 **AI-Powered Document Analysis**: Upload prescriptions, lab results, and medical documents
+- 💊 **Medication Management**: Track dosages, frequencies, and refill dates
+- 📅 **Smart Calendar Integration**: Sync health events to Google Calendar
+- 💬 **Health Chat Assistant**: Get personalized health advice and reminders
+- 📊 **Health Dashboard**: Visualize your health metrics and recommendations
+- 🗄️ **Cloud Database**: Secure data storage with Supabase
 
-## 🏗️ Architecture
+## Quick Start
 
-### Backend (Python Flask)
-- **Flask API**: RESTful endpoints for document processing and health management
-- **Google Gemini Integration**: AI-powered document analysis and health conversations
-- **Google Calendar API**: Automatic calendar synchronization
-- **JSON Storage**: Simple file-based data storage (no database setup required)
-
-### Frontend (React)
-- **Modern UI**: Clean, professional healthcare interface built with Tailwind CSS
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- **Real-time Updates**: Live data synchronization across all components
-
-## 🛠️ Tech Stack
-
-- **Backend**: Python Flask, Google Gemini API, Google Calendar API
-- **Frontend**: React 18, Tailwind CSS, Lucide React Icons
-- **AI**: Google Gemini Pro (free tier)
-- **Storage**: JSON files (simple, no database)
-- **Deployment**: Vercel (frontend) + Railway (backend)
-
-## 📋 Prerequisites
+### Prerequisites
 
 - Python 3.8+
 - Node.js 16+
-- Google Gemini API key
-- Google Calendar API credentials (optional for MVP)
+- Google Gemini API Key (free tier available)
+- Supabase Account (free tier available)
 
-## 🚀 Quick Start
+### 1. Get Your API Keys
 
-### 1. Clone the Repository
+#### Google Gemini API Key
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Create a new API key
+3. Copy the key for the next step
+
+#### Supabase Setup
+1. Go to [Supabase](https://supabase.com) and create a new project
+2. Get your project URL and API keys from Settings → API
+3. Copy the following keys:
+   - **Project URL** (looks like: `https://your-project-id.supabase.co`)
+   - **Anon Key** (public key, starts with `eyJ...`)
+   - **Service Key** (private key, for backend)
+
+### 2. Setup Environment
+
 ```bash
+# Clone the repository
 git clone <your-repo-url>
-cd healthsync-ai
+cd healthsync
+
+# Backend environment
+cp backend/env_example.txt backend/.env
+# Edit backend/.env and add your keys:
+# GEMINI_API_KEY=your_actual_gemini_key
+# SUPABASE_URL=your_supabase_url
+# SUPABASE_ANON_KEY=your_supabase_anon_key
+# SUPABASE_SERVICE_KEY=your_supabase_service_key
+
+# Frontend environment
+cp frontend/env_example.txt frontend/.env
+# Edit frontend/.env and add your keys:
+# REACT_APP_SUPABASE_URL=your_supabase_url
+# REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-### 2. Backend Setup
+### 3. Setup Supabase Database
+
+1. Go to your Supabase project dashboard
+2. Navigate to SQL Editor
+3. Copy and paste the contents of `supabase_schema.sql`
+4. Run the SQL to create the database schema
+
+### 4. Run the Application
+
+#### Option A: Use the startup script (Recommended)
+```bash
+./start.sh
+```
+
+#### Option B: Manual setup
+
+**Backend:**
 ```bash
 cd backend
-
-# Install Python dependencies
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-# Set environment variables
-export GEMINI_API_KEY="your-gemini-api-key-here"
-
-# Run the Flask server
 python app.py
 ```
 
-The backend will start on `http://localhost:5000`
-
-### 3. Frontend Setup
+**Frontend:**
 ```bash
 cd frontend
-
-# Install Node.js dependencies
 npm install
-
-# Start the development server
 npm start
 ```
 
-The frontend will start on `http://localhost:3000`
+### 5. Access the Application
 
-## 🔑 Environment Variables
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:5001
 
-### Backend (.env)
-```bash
-GEMINI_API_KEY=your_gemini_api_key_here
-GOOGLE_CALENDAR_CREDENTIALS=path_to_credentials.json
-FLASK_ENV=development
+## API Keys Required
+
+### Required for Full Functionality:
+- **Google Gemini API Key**: For AI-powered document analysis and health chat
+  - Get it from: https://makersuite.google.com/app/apikey
+  - Free tier: 15 requests/minute, 1500 requests/day
+
+- **Supabase Keys**: For authentication and data storage
+  - **Project URL**: Your Supabase project URL
+  - **Anon Key**: Public key for frontend
+  - **Service Key**: Private key for backend
+  - Get them from: https://supabase.com
+
+### Optional (for production):
+- **Google Calendar API**: For calendar integration
+  - Only needed if you want to sync events to Google Calendar
+  - Requires OAuth setup
+
+## How It Works
+
+### Authentication Flow
+1. Users register/login with email and password
+2. Supabase handles authentication and JWT tokens
+3. All API requests include authentication headers
+4. Row Level Security ensures users only see their own data
+
+### Document Upload
+1. Upload medical documents (prescriptions, lab results, doctor notes)
+2. AI extracts structured health information
+3. Data is saved to Supabase database
+4. Automatically populates your health dashboard
+
+### Health Chat
+1. Ask questions about your medications, appointments, or health
+2. AI provides personalized responses based on your health profile
+3. Chat history is stored securely in Supabase
+4. Get reminders and recommendations
+
+### Calendar Sync
+1. Click "Sync to Calendar" in the dashboard
+2. AI creates optimal medication reminders and appointment events
+3. Events are added to your Google Calendar (mock mode in development)
+
+## Development
+
+### Project Structure
+```
+healthsync/
+├── backend/           # Flask API server
+│   ├── app.py        # Main Flask application with auth
+│   ├── gemini_service.py  # Google Gemini AI integration
+│   ├── calendar_service.py # Google Calendar integration
+│   └── data.json     # Local data storage (fallback)
+├── frontend/         # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── auth/     # Authentication components
+│   │   │   └── ...       # Other components
+│   │   ├── contexts/     # React contexts
+│   │   ├── config/       # Supabase configuration
+│   │   └── utils/        # API utilities
+│   └── package.json
+├── supabase_schema.sql  # Database schema
+└── start.sh         # Startup script
 ```
 
-### Frontend (.env)
-```bash
-REACT_APP_API_URL=http://localhost:5000
-REACT_APP_GEMINI_API_KEY=your_gemini_api_key_here
-```
+### API Endpoints
 
-## 📱 API Endpoints
+- `GET /health` - Health check
+- `GET /health-data` - Get all health data (authenticated)
+- `POST /upload` - Upload and analyze document text (authenticated)
+- `POST /import-file` - Upload and analyze file (authenticated)
+- `POST /chat` - Send chat message (authenticated)
+- `POST /sync-calendar` - Sync to Google Calendar (authenticated)
+- `GET /chat-history` - Get chat history (authenticated)
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/upload` | POST | Upload and analyze medical documents |
-| `/chat` | POST | Chat with AI health assistant |
-| `/sync-calendar` | POST | Sync health data to Google Calendar |
-| `/health-data` | GET | Get user's health summary |
-| `/chat-history` | GET | Get chat conversation history |
+### Authentication Flow
 
-## 🎯 Demo Flow
+1. **Frontend**: User enters credentials
+2. **Supabase**: Validates credentials and returns JWT token
+3. **Frontend**: Stores token and includes in API requests
+4. **Backend**: Validates JWT token with Supabase
+5. **Database**: Row Level Security ensures data isolation
 
-### 1. Document Upload (30 seconds)
-- Drag & drop prescription image
-- Watch AI extract 3+ medications automatically
-- View structured data extraction
+## Troubleshooting
 
-### 2. Smart Calendar Sync (30 seconds)
-- Click "Sync to Calendar"
-- See 15+ events auto-created
-- Highlight medication reminders
+### Backend Issues
+- **Port already in use**: Change port in `backend/app.py`
+- **API key error**: Check your `.env` file
+- **Import errors**: Make sure virtual environment is activated
+- **Supabase connection error**: Verify your Supabase keys
 
-### 3. AI Health Chat (60 seconds)
-- Ask: "When should I take my blood pressure medication?"
-- AI responds with personalized timing
-- Ask: "What exercises are safe for my condition?"
-- AI gives specific recommendations based on profile
+### Frontend Issues
+- **Cannot connect to backend**: Check if backend is running on port 5001
+- **Build errors**: Run `npm install` in frontend directory
+- **Authentication errors**: Check Supabase configuration
 
-## 🔧 Development
+### Supabase Issues
+- **Database schema not created**: Run the SQL from `supabase_schema.sql`
+- **RLS policies not working**: Check if Row Level Security is enabled
+- **User creation failing**: Verify the trigger function exists
 
-### Backend Development
-```bash
-cd backend
-python app.py
-```
+### Mock Mode
+If the backend is not available, the frontend will automatically use mock data for development.
 
-### Frontend Development
-```bash
-cd frontend
-npm start
-```
+## Security Notes
 
-### Running Tests
-```bash
-# Backend tests
-cd backend
-python -m pytest
+- Never commit API keys to version control
+- Use environment variables for sensitive data
+- Supabase provides Row Level Security for data isolation
+- JWT tokens are automatically handled by Supabase
+- The current implementation uses mock calendar service for development
+- For production, implement proper OAuth for Google Calendar
 
-# Frontend tests
-cd frontend
-npm test
-```
-
-## 📦 Deployment
-
-### Backend (Railway)
-1. Push to GitHub
-2. Connect Railway to repository
-3. Add environment variables
-4. Deploy automatically
-
-### Frontend (Vercel)
-1. Push to GitHub
-2. Connect Vercel to repository
-3. Deploy automatically
-4. Update API URLs
-
-## 🎨 Customization
-
-### Adding New Health Metrics
-1. Update the Gemini prompts in `gemini_service.py`
-2. Modify the data structure in `data.json`
-3. Update the frontend components
-
-### Custom AI Prompts
-The application uses specialized prompts for different health tasks:
-- **Medical Document Analysis**: Extracts medications, appointments, and health metrics
-- **Health Chat**: Provides personalized health advice
-- **Smart Scheduling**: Creates optimal calendar events
-
-## 🚨 Important Notes
-
-- **Medical Disclaimer**: This application is for informational purposes only and should not replace professional medical advice
-- **Data Privacy**: Health data is stored locally and should be handled with appropriate security measures
-- **API Limits**: Google Gemini has rate limits on the free tier
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-For support and questions:
-- Create an issue in the GitHub repository
-- Check the documentation
-- Review the demo flow
-
-## 🎉 Success Metrics
-
-- ✅ Upload prescription → Extract 3+ medications automatically
-- ✅ Generate 10+ smart calendar events in seconds
-- ✅ AI chat answers 3 health questions using user's data
-- ✅ Professional healthcare UI (clean, trustworthy design)
-- ✅ Complete user journey under 90 seconds
-
----
-
-**Built with ❤️ using Google Gemini AI**
+This project is for educational purposes. Always consult healthcare professionals for medical advice.

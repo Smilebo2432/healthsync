@@ -39,6 +39,496 @@
         ]
       },
       "uploaded_at": "2024-08-29T21:15:00"
+    },
+    {
+      "id": 2,
+      "text": "Sample prescription text for testing purposes",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": [
+          "Document processed but structure unclear"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:06:04.082520"
+    },
+    {
+      "id": 3,
+      "text": "Sample prescription text for testing purposes",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": [
+          "Document processed but structure unclear"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:06:12.577068"
+    },
+    {
+      "id": 4,
+      "text": "Sample prescription text for testing purposes",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": [
+          "Document processed but structure unclear"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:27:07.153037"
+    },
+    {
+      "id": 5,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": null,
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": null,
+            "instructions": "in the morning",
+            "refill_date": null
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:47:52.105914"
+    },
+    {
+      "id": 6,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": null,
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": null,
+            "instructions": "in the morning",
+            "refill_date": null
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:48:02.145368"
+    },
+    {
+      "id": 7,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": null,
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": null,
+            "instructions": "in the morning",
+            "refill_date": null
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:49:18.072908"
+    },
+    {
+      "id": 8,
+      "text": "Prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": null,
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": null,
+            "instructions": "in the morning",
+            "refill_date": null
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:51:32.260136",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 9,
+      "text": "\nPrescription for John Doe:\n- Metformin 500mg twice daily with meals for diabetes management\n- Lisinopril 10mg once daily in the morning for blood pressure control\n- Atorvastatin 20mg once daily in the evening for cholesterol\n\nFollow-up appointment with Dr. Sarah Johnson on September 15th, 2024 at 2:00 PM for diabetes management check-up.\n\nRecent lab results:\n- Blood pressure: 135/85 (slightly elevated)\n- Blood sugar (fasting): 120 mg/dL (controlled)\n- Weight: 180 lbs\n\nRecommendations:\n- Monitor blood sugar levels regularly\n- Check blood pressure weekly\n- Continue daily exercise routine\n- Maintain low-sodium diet\n",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": "ongoing",
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the morning",
+            "refill_date": null
+          },
+          {
+            "name": "Atorvastatin",
+            "dosage": "20mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the evening",
+            "refill_date": null
+          }
+        ],
+        "appointments": [
+          {
+            "type": "follow-up",
+            "doctor": "Dr. Sarah Johnson",
+            "date": "2024-09-15",
+            "reason": "diabetes management check-up"
+          }
+        ],
+        "health_metrics": [
+          {
+            "metric": "Blood pressure",
+            "value": "135/85 mmHg",
+            "date": null,
+            "status": "slightly elevated"
+          },
+          {
+            "metric": "Blood sugar (fasting)",
+            "value": "120 mg/dL",
+            "date": null,
+            "status": "controlled"
+          },
+          {
+            "metric": "Weight",
+            "value": "180 lbs",
+            "date": null,
+            "status": null
+          }
+        ],
+        "recommendations": [
+          "Monitor blood sugar levels regularly",
+          "Check blood pressure weekly",
+          "Continue daily exercise routine",
+          "Maintain low-sodium diet"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:51:54.765498",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 10,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": "",
+            "instructions": "with meals",
+            "refill_date": ""
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": "",
+            "instructions": "in the morning",
+            "refill_date": ""
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:52:38.322380"
+    },
+    {
+      "id": 11,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": null,
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": null,
+            "instructions": "in the morning",
+            "refill_date": null
+          }
+        ],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T10:52:47.548880"
+    },
+    {
+      "id": 12,
+      "text": "Patient: John Smith\n\nPrescription:\n- Metformin 500mg twice daily with meals for diabetes management\n- Lisinopril 10mg once daily in the morning for blood pressure control\n- Atorvastatin 20mg once daily in the evening for cholesterol management\n\nLab Results:\n- Blood pressure: 140/90 mmHg (elevated)\n- Blood sugar (fasting): 125 mg/dL (controlled)\n- Cholesterol: 220 mg/dL (high)\n- Weight: 185 lbs\n\nAppointment:\n- Follow-up with Dr. Johnson on September 20th, 2024 at 2:00 PM for diabetes and blood pressure management\n\nRecommendations:\n- Monitor blood sugar levels daily\n- Check blood pressure weekly\n- Maintain low-sodium diet\n- Exercise 30 minutes daily\n- Schedule lipid panel in 3 months",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": "ongoing",
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the morning",
+            "refill_date": null
+          },
+          {
+            "name": "Atorvastatin",
+            "dosage": "20mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the evening",
+            "refill_date": null
+          }
+        ],
+        "appointments": [
+          {
+            "type": "Follow-up",
+            "doctor": "Dr. Johnson",
+            "date": "2024-09-20",
+            "reason": "diabetes and blood pressure management"
+          }
+        ],
+        "health_metrics": [
+          {
+            "metric": "Blood pressure",
+            "value": "140/90 mmHg",
+            "date": null,
+            "status": "elevated"
+          },
+          {
+            "metric": "Blood sugar (fasting)",
+            "value": "125 mg/dL",
+            "date": null,
+            "status": "controlled"
+          },
+          {
+            "metric": "Cholesterol",
+            "value": "220 mg/dL",
+            "date": null,
+            "status": "high"
+          },
+          {
+            "metric": "Weight",
+            "value": "185 lbs",
+            "date": null,
+            "status": null
+          }
+        ],
+        "recommendations": [
+          "Monitor blood sugar levels daily",
+          "Check blood pressure weekly",
+          "Maintain low-sodium diet",
+          "Exercise 30 minutes daily",
+          "Schedule lipid panel in 3 months"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:56:08.591072",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 13,
+      "text": "\n    Patient: Sarah Johnson\n    Date: September 15, 2024\n    \n    PRESCRIPTION:\n    - Metformin 500mg twice daily with meals for diabetes management\n    - Lisinopril 10mg once daily in the morning for blood pressure control\n    - Atorvastatin 20mg once daily in the evening for cholesterol management\n    - Aspirin 81mg once daily for heart health\n    \n    LAB RESULTS:\n    - Blood pressure: 135/85 mmHg (slightly elevated)\n    - Blood sugar (fasting): 118 mg/dL (well controlled)\n    - Cholesterol: 180 mg/dL (normal)\n    - Weight: 165 lbs\n    - BMI: 24.5 (normal)\n    \n    APPOINTMENTS:\n    - Follow-up with Dr. Williams on October 1st, 2024 at 10:00 AM for diabetes management\n    - Lab work scheduled for September 25th, 2024 at 8:00 AM\n    - Eye exam with Dr. Davis on October 15th, 2024 at 2:00 PM\n    \n    RECOMMENDATIONS:\n    - Continue monitoring blood sugar levels daily\n    - Check blood pressure weekly\n    - Maintain low-sodium, heart-healthy diet\n    - Exercise 30 minutes daily (walking, swimming, or cycling)\n    - Schedule annual physical exam in 6 months\n    - Consider joining diabetes support group\n    ",
+      "analysis": {
+        "medications": [
+          {
+            "name": "Metformin",
+            "dosage": "500mg",
+            "frequency": "twice daily",
+            "duration": "ongoing",
+            "instructions": "with meals",
+            "refill_date": null
+          },
+          {
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the morning",
+            "refill_date": null
+          },
+          {
+            "name": "Atorvastatin",
+            "dosage": "20mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": "in the evening",
+            "refill_date": null
+          },
+          {
+            "name": "Aspirin",
+            "dosage": "81mg",
+            "frequency": "once daily",
+            "duration": "ongoing",
+            "instructions": null,
+            "refill_date": null
+          }
+        ],
+        "appointments": [
+          {
+            "type": "Follow-up",
+            "doctor": "Dr. Williams",
+            "date": "2024-10-01",
+            "reason": "diabetes management"
+          },
+          {
+            "type": "Lab work",
+            "doctor": null,
+            "date": "2024-09-25",
+            "reason": null
+          },
+          {
+            "type": "Eye exam",
+            "doctor": "Dr. Davis",
+            "date": "2024-10-15",
+            "reason": null
+          }
+        ],
+        "health_metrics": [
+          {
+            "metric": "Blood pressure",
+            "value": "135/85 mmHg",
+            "date": "2024-09-15",
+            "status": "slightly elevated"
+          },
+          {
+            "metric": "Blood sugar (fasting)",
+            "value": "118 mg/dL",
+            "date": "2024-09-15",
+            "status": "well controlled"
+          },
+          {
+            "metric": "Cholesterol",
+            "value": "180 mg/dL",
+            "date": "2024-09-15",
+            "status": "normal"
+          },
+          {
+            "metric": "Weight",
+            "value": "165 lbs",
+            "date": "2024-09-15",
+            "status": null
+          },
+          {
+            "metric": "BMI",
+            "value": "24.5",
+            "date": "2024-09-15",
+            "status": "normal"
+          }
+        ],
+        "recommendations": [
+          "Continue monitoring blood sugar levels daily",
+          "Check blood pressure weekly",
+          "Maintain low-sodium, heart-healthy diet",
+          "Exercise 30 minutes daily (walking, swimming, or cycling)",
+          "Schedule annual physical exam in 6 months",
+          "Consider joining diabetes support group"
+        ]
+      },
+      "uploaded_at": "2025-08-30T10:57:05.367996",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 14,
+      "text": "test",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T11:01:08.623223",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 15,
+      "text": "test",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": []
+      },
+      "uploaded_at": "2025-08-30T11:03:27.509237",
+      "user_id": "dev-user"
+    },
+    {
+      "id": 16,
+      "text": "Sample prescription: Metformin 500mg twice daily with meals. Lisinopril 10mg once daily in the morning.",
+      "analysis": {
+        "medications": [],
+        "appointments": [],
+        "health_metrics": [],
+        "recommendations": [
+          "Error processing document: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 7\n}\n]"
+        ]
+      },
+      "uploaded_at": "2025-08-30T11:08:52.379397"
     }
   ],
   "medications": [
@@ -65,6 +555,70 @@
       "duration": "ongoing",
       "instructions": "Take in the evening",
       "refill_date": "2024-09-18"
+    },
+    {
+      "name": "Metformin",
+      "dosage": "500mg",
+      "frequency": "twice daily",
+      "duration": null,
+      "instructions": "with meals",
+      "refill_date": null
+    },
+    {
+      "name": "Lisinopril",
+      "dosage": "10mg",
+      "frequency": "once daily",
+      "duration": null,
+      "instructions": "in the morning",
+      "refill_date": null
+    },
+    {
+      "name": "Metformin",
+      "dosage": "500mg",
+      "frequency": "twice daily",
+      "duration": "ongoing",
+      "instructions": "with meals",
+      "refill_date": null
+    },
+    {
+      "name": "Lisinopril",
+      "dosage": "10mg",
+      "frequency": "once daily",
+      "duration": "ongoing",
+      "instructions": "in the morning",
+      "refill_date": null
+    },
+    {
+      "name": "Atorvastatin",
+      "dosage": "20mg",
+      "frequency": "once daily",
+      "duration": "ongoing",
+      "instructions": "in the evening",
+      "refill_date": null
+    },
+    {
+      "name": "Metformin",
+      "dosage": "500mg",
+      "frequency": "twice daily",
+      "duration": "",
+      "instructions": "with meals",
+      "refill_date": ""
+    },
+    {
+      "name": "Lisinopril",
+      "dosage": "10mg",
+      "frequency": "once daily",
+      "duration": "",
+      "instructions": "in the morning",
+      "refill_date": ""
+    },
+    {
+      "name": "Aspirin",
+      "dosage": "81mg",
+      "frequency": "once daily",
+      "duration": "ongoing",
+      "instructions": null,
+      "refill_date": null
     }
   ],
   "appointments": [
@@ -73,6 +627,36 @@
       "doctor": "Dr. Sarah Johnson",
       "date": "2024-09-15T10:00:00",
       "reason": "Diabetes management check-up"
+    },
+    {
+      "type": "follow-up",
+      "doctor": "Dr. Sarah Johnson",
+      "date": "2024-09-15",
+      "reason": "diabetes management check-up"
+    },
+    {
+      "type": "Follow-up",
+      "doctor": "Dr. Johnson",
+      "date": "2024-09-20",
+      "reason": "diabetes and blood pressure management"
+    },
+    {
+      "type": "Follow-up",
+      "doctor": "Dr. Williams",
+      "date": "2024-10-01",
+      "reason": "diabetes management"
+    },
+    {
+      "type": "Lab work",
+      "doctor": null,
+      "date": "2024-09-25",
+      "reason": null
+    },
+    {
+      "type": "Eye exam",
+      "doctor": "Dr. Davis",
+      "date": "2024-10-15",
+      "reason": null
     }
   ],
   "health_metrics": [
@@ -87,6 +671,78 @@
       "value": "120 mg/dL",
       "date": "2024-08-28",
       "status": "controlled"
+    },
+    {
+      "metric": "Blood pressure",
+      "value": "135/85 mmHg",
+      "date": null,
+      "status": "slightly elevated"
+    },
+    {
+      "metric": "Blood sugar (fasting)",
+      "value": "120 mg/dL",
+      "date": null,
+      "status": "controlled"
+    },
+    {
+      "metric": "Weight",
+      "value": "180 lbs",
+      "date": null,
+      "status": null
+    },
+    {
+      "metric": "Blood pressure",
+      "value": "140/90 mmHg",
+      "date": null,
+      "status": "elevated"
+    },
+    {
+      "metric": "Blood sugar (fasting)",
+      "value": "125 mg/dL",
+      "date": null,
+      "status": "controlled"
+    },
+    {
+      "metric": "Cholesterol",
+      "value": "220 mg/dL",
+      "date": null,
+      "status": "high"
+    },
+    {
+      "metric": "Weight",
+      "value": "185 lbs",
+      "date": null,
+      "status": null
+    },
+    {
+      "metric": "Blood pressure",
+      "value": "135/85 mmHg",
+      "date": "2024-09-15",
+      "status": "slightly elevated"
+    },
+    {
+      "metric": "Blood sugar (fasting)",
+      "value": "118 mg/dL",
+      "date": "2024-09-15",
+      "status": "well controlled"
+    },
+    {
+      "metric": "Cholesterol",
+      "value": "180 mg/dL",
+      "date": "2024-09-15",
+      "status": "normal"
+    },
+    {
+      "metric": "Weight",
+      "value": "165 lbs",
+      "date": "2024-09-15",
+      "status": null
+    },
+    {
+      "metric": "BMI",
+      "value": "24.5",
+      "date": "2024-09-15",
+      "status": "normal"
     }
   ],
   "recommendations": [
@@ -94,7 +750,17 @@
     "Check blood pressure weekly",
     "Schedule follow-up in 3 months",
     "Continue daily exercise routine",
-    "Maintain low-sodium diet"
+    "Maintain low-sodium diet",
+    "Document processed but structure unclear",
+    "Monitor blood sugar levels daily",
+    "Exercise 30 minutes daily",
+    "Schedule lipid panel in 3 months",
+    "Continue monitoring blood sugar levels daily",
+    "Maintain low-sodium, heart-healthy diet",
+    "Exercise 30 minutes daily (walking, swimming, or cycling)",
+    "Schedule annual physical exam in 6 months",
+    "Consider joining diabetes support group",
+    "Error processing document: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 7\n}\n]"
   ],
   "chat_history": [
     {
@@ -108,6 +774,108 @@
       "user_message": "What exercises are safe for my condition?",
       "ai_response": "Great question! With diabetes and slightly elevated blood pressure, low-impact exercises are excellent choices. Walking for 30 minutes daily, swimming, and gentle yoga are all safe and beneficial. These activities help control blood sugar, lower blood pressure, and improve circulation. Start with 10-15 minutes and gradually increase. Remember to check your blood sugar before and after exercise, and stay hydrated!",
       "timestamp": "2024-08-29T21:12:00"
+    },
+    {
+      "id": 3,
+      "user_message": "hi",
+      "ai_response": "Hi there! \ud83d\udc4b It's wonderful to see you checking in.\n\nI noticed your blood pressure was slightly elevated at 135/85 on August 28th, and your next follow-up with Dr. Johnson for diabetes management is on September 15th.\n\nTo support your health goals, consider these small steps:\n*   **Hydrate:** Aim for an extra glass or two of water today.\n*   **Gentle Movement:** A short 15-minute walk could be great!\n*   **Mindful Moment:** Take a few deep breaths to help relax.\n\nKeep up the great work, and remember to reach out if you have any concerns!",
+      "timestamp": "2025-08-30T10:05:56.106717"
+    },
+    {
+      "id": 4,
+      "user_message": "hey im gay",
+      "ai_response": "Hey there! Thanks for sharing that with me. It's wonderful that you're opening up. As your HealthBuddy, I'm here to support your overall well-being.\n\nI see your next follow-up with Dr. Sarah Johnson for diabetes management is on September 15th. That's a great opportunity to discuss any health topics that are on your mind.\n\nFor now, let's focus on your health:\n\n*   **Keep up the great work** with your Metformin, Lisinopril, and Atorvastatin. Remember to take them as prescribed!\n*   **Continue monitoring your blood pressure** as recommended.\n*   It's also a good time to **plan for your upcoming follow-up appointment**.\n\nIf you have any specific health concerns you'd like to discuss, especially those related to your identity, bringing them up with Dr. Johnson is a fantastic idea. I'm here to help you track your health journey!",
+      "timestamp": "2025-08-30T10:27:19.094933"
+    },
+    {
+      "id": 5,
+      "user_message": "When should I take my blood pressure medication?",
+      "ai_response": "Hi there!  It's great you're proactively managing your health.  Regarding your Lisinopril,  the best time to take it is usually once daily in the morning,  as it can sometimes cause a slight drop in blood pressure.  Consistency is key!\n\nRemember, your blood pressure reading of 135/85 is slightly elevated, and it's important to keep a close eye on it.  Let's work together to keep it in check. \n\nHere are three actionable steps:\n\n1. **Take your Lisinopril as prescribed at the same time each morning.**  This helps maintain a consistent level in your system.\n2. **Continue to monitor your blood pressure weekly**, as recommended.  Make a note of your readings and bring them to your upcoming appointment with Dr. Johnson on September 15th.\n3. **Discuss your blood pressure with Dr. Johnson** at your next appointment. She can assess your progress and adjust your treatment plan if needed.\n\n\nRemember, I'm here to support you, but always consult your doctor for any medication changes or concerns.  Keep up the great work!",
+      "timestamp": "2025-08-30T10:42:17.757292"
+    },
+    {
+      "id": 6,
+      "user_message": "When should I take my blood pressure medication?",
+      "ai_response": "Hi there!  It's great you're proactively managing your health.  Regarding your Lisinopril,  the best time to take it is usually once daily in the morning.  This is a common recommendation, but it's always best to confirm with Dr. Johnson at your upcoming appointment on September 15th.  She can personalize the timing based on your specific needs and response to the medication.\n\nIn the meantime, remember to take it at the same time each day to maintain consistent blood pressure control.  To help you remember, you could set a daily alarm on your phone or place your medication next to your toothbrush.\n\nYour recent blood pressure reading of 135/85 is slightly elevated, so consistently taking your Lisinopril as prescribed, along with monitoring your blood pressure weekly as recommended, is very important.  Let's work together to get that number down!",
+      "timestamp": "2025-08-30T10:45:10.765862"
+    },
+    {
+      "id": 7,
+      "user_message": "What exercises are safe for my condition?",
+      "ai_response": "Hi there!  It's great you're focusing on exercise.  Given your medications (Metformin, Lisinopril, and Atorvastatin) and slightly elevated blood pressure (135/85), it's important to choose exercises that are gentle on your heart and safe for your overall health.\n\nTo help you stay active safely, let's focus on these 3 steps:\n\n1. **Start with low-impact activities:**  Brisk walking, swimming, or cycling are excellent choices.  These are easier on your joints and help manage blood pressure effectively. Aim for at least 30 minutes most days of the week, gradually increasing the intensity and duration as you feel comfortable.\n\n2. **Listen to your body:**  Pay close attention to how you feel during and after exercise.  If you experience chest pain, dizziness, or shortness of breath, stop immediately and consult your doctor. Remember, consistency is key, not intensity, especially when starting.\n\n3. **Discuss your exercise plan with Dr. Johnson:**  Your upcoming appointment on September 15th is perfect for discussing a personalized exercise plan that aligns with your current health metrics and medications. She can help you tailor your routine to your specific needs and monitor your progress.\n\nRemember, your fasting blood sugar of 120 mg/dL is well-controlled, and regular exercise is an excellent way to further support this.  Keep up the great work!  Let's work together to achieve your health goals.",
+      "timestamp": "2025-08-30T10:45:13.201308"
+    },
+    {
+      "id": 8,
+      "user_message": "How often should I check my blood sugar?",
+      "ai_response": "Hi there!  It's great you're proactive about managing your blood sugar.  Your fasting blood sugar of 120 mg/dL is currently controlled, which is excellent news!  However, maintaining this is key, especially given you're taking Metformin.\n\nTo best monitor your levels and help you stay on track, I recommend checking your blood sugar:\n\n1. **Fasting:**  Every morning before breakfast, as you've likely been doing. This gives us a baseline.\n2. **Post-Meal:**  Two hours after your largest meal of the day to see how your body responds to food.  This will help us fine-tune your diet and medication if needed.\n3. **Random Checks:**  A few times a week at random times to get a broader picture.  This helps identify trends and any unexpected spikes.\n\nRemember, consistency is key!  Document your readings so you can discuss them with Dr. Johnson at your upcoming appointment on September 15th.  These consistent readings will help her assess your progress and make any necessary adjustments to your Metformin dosage or lifestyle recommendations.  Always consult with her before making any changes to your medication or diet.  Let's work together to keep your blood sugar levels within a healthy range!",
+      "timestamp": "2025-08-30T10:45:15.298486"
+    },
+    {
+      "id": 9,
+      "user_message": "What foods should I avoid with my medications?",
+      "ai_response": "Hi there!  It's great you're proactively managing your health.  Let's talk about food and your medications.\n\nSince you're taking Metformin, it's important to be mindful of consuming large amounts of alcohol, as this can increase your risk of lactic acidosis (a rare but serious complication).  It's also best to avoid very high-sugar foods as Metformin helps regulate blood sugar, and high sugar intake can counteract its effects.  Remember your fasting blood sugar is currently controlled at 120 mg/dL,  but consistent monitoring is key.\n\nYour Lisinopril can sometimes interact with potassium-rich foods if you already have elevated potassium levels.  Your doctor might have already discussed this, but it's worth mentioning.  It's generally fine to enjoy potassium-rich foods in moderation, but avoiding excessive consumption of things like bananas, oranges, and spinach is a good precaution. Always check with Dr. Johnson or your pharmacist to clarify further.\n\nFinally, while Atorvastatin doesn't have many dietary restrictions, a diet low in saturated and trans fats remains important for managing cholesterol.\n\nTo summarize:  1) Limit alcohol consumption. 2) Avoid excessive sugar. 3) Moderate your intake of potassium-rich foods.  Remember to discuss any dietary concerns with your doctor, especially if you experience any side effects.  Let's work together to support your health journey!  Keep up the good work with your exercise and low-sodium diet!",
+      "timestamp": "2025-08-30T10:45:17.626510"
+    },
+    {
+      "id": 10,
+      "user_message": "hi",
+      "ai_response": "Hi there!  It's great to connect.  I see you have a follow-up appointment with Dr. Johnson scheduled for September 15th \u2013 excellent!  \n\nYour recent blood pressure reading of 135/85 is slightly elevated, and while your fasting blood sugar of 120 mg/dL is well-controlled, consistent monitoring is key.  Remember to take your Metformin twice daily as prescribed to help manage your blood sugar.\n\nTo help lower your blood pressure, let's focus on some actionable steps:\n\n1. **Increase potassium-rich foods:**  Potassium helps counter the effects of sodium. Try adding more bananas, spinach, or sweet potatoes to your diet this week.\n2. **Check your blood pressure weekly:**  Use a home monitor to track your progress and share the readings with Dr. Johnson at your appointment.\n3. **Review your sodium intake:**  Try to reduce processed foods and use less salt when cooking.\n\nRemember, I'm here to support you, but always consult Dr. Johnson for any health concerns.  Let's work together to keep you feeling your best!",
+      "timestamp": "2025-08-30T10:49:50.053509"
+    },
+    {
+      "id": 11,
+      "user_message": "Hello, how are you?",
+      "ai_response": "Hello! I'm doing great, thank you for asking.  And how are you feeling today?\n\nI see you're doing well managing your blood sugar levels \u2013 your fasting blood sugar of 120 mg/dL is within a controlled range, which is fantastic!  Keep up the great work with your diet and exercise.  Remember to monitor it regularly as recommended.\n\nYour blood pressure is slightly elevated at 135/85 mmHg.  While it's not alarmingly high, let's work on getting it down.  We can build on your existing plan.\n\nHere are three actionable steps:\n\n1. **Prioritize your low-sodium diet:**  Try using herbs and spices instead of salt when cooking. Check food labels carefully for sodium content.\n\n2. **Consistent blood pressure monitoring:** Continue checking your blood pressure weekly, and bring the readings to your upcoming appointment with Dr. Johnson on September 15th.  This will help us track progress effectively.\n\n3. **Discuss your medication with Dr. Johnson:** Since you are taking Lisinopril for blood pressure, we need to make sure the dosage is still appropriate.  Your appointment is a perfect opportunity to discuss your blood pressure readings and explore any adjustments she might suggest.\n\nRemember, I'm here to support you, but always consult with your doctor before making changes to your medication or treatment plan.  Let's work together to achieve your health goals!",
+      "timestamp": "2025-08-30T10:50:31.842918"
+    },
+    {
+      "id": 12,
+      "user_message": "When should I take my blood pressure medication?",
+      "ai_response": "Hi there!  It's great you're proactively managing your health.  I see you're taking Lisinopril 10mg daily to help manage your blood pressure.  To ensure optimal effectiveness, the best time to take Lisinopril is usually in the morning, on an empty stomach, or at least an hour before a meal. This allows for consistent absorption throughout the day.\n\nRemember, your blood pressure readings have been slightly elevated (135/85 mmHg), so it's important to take your medication as prescribed and consistently monitor your blood pressure as recommended.  You have a follow-up appointment with Dr. Johnson on September 15th \u2013 this would be an excellent time to discuss your blood pressure readings and any concerns.\n\nFor now, try these three things:\n\n1.  **Take your Lisinopril as prescribed, first thing in the morning.**\n2.  **Continue checking your blood pressure weekly**, and record the readings to discuss at your upcoming appointment.\n3.  **Make a list of questions** for Dr. Johnson about your blood pressure management.\n\nWhile I can offer general guidance, it's always best to discuss medication timing specifics and any concerns with your doctor. They can provide the most personalized and accurate advice.  Keep up the great work!",
+      "timestamp": "2025-08-30T10:51:56.871061"
+    },
+    {
+      "id": 13,
+      "user_message": "I have high blood pressure and diabetes. What should I eat for breakfast?",
+      "ai_response": "Hi there!  It's great you're focusing on managing your high blood pressure and diabetes through diet.  I see your recent blood pressure readings have been slightly elevated (135/85 and even 140/90 mmHg), and your fasting blood sugar is generally controlled, though it did reach 125mg/dL recently.  This is all important information for planning your meals.\n\nFor a healthy breakfast that supports your conditions, focus on these three key elements:\n\n1. **Fiber-rich complex carbohydrates:**  Start with \u00bd cup of oatmeal (rolled oats are best), or a small bowl of berries (blueberries, raspberries).  These provide sustained energy without spiking your blood sugar.  Avoid sugary cereals or pastries.\n\n2. **Lean protein:** Add a source of lean protein like a small handful of nuts (almonds, walnuts),  a hard-boiled egg, or a dollop of Greek yogurt. Protein helps you feel full and satisfied, preventing overeating later.\n\n3. **Healthy fats:** Include a small amount of healthy fats, such as those found in a tablespoon of nut butter or a sprinkle of chia seeds on your oatmeal.  These help regulate blood sugar and support heart health.\n\nRemember, consistently following a balanced diet and your medication schedule (Metformin, Lisinopril, Atorvastatin) is crucial.  Your upcoming appointments with Dr. Johnson are important; let's make sure to prepare a list of any questions you have before then.  Also, please consistently monitor your blood pressure and blood sugar as recommended.  Don\u2019t hesitate to reach out if you have any concerns!  We can work together to make healthy choices easier.",
+      "timestamp": "2025-08-30T10:56:16.482130"
+    },
+    {
+      "id": 14,
+      "user_message": "I have diabetes and high blood pressure. What exercises are safe for me?",
+      "ai_response": "Hi there!  It's great that you're focusing on exercise with your diabetes and high blood pressure.  That's fantastic!  Given your health profile, which shows slightly elevated blood pressure (ranging from 135/85 to 140/90 mmHg) and well-controlled blood sugar (mostly around 120 mg/dL), I can offer some suggestions.  Remember, it's always best to discuss your exercise plans with Dr. Johnson or Dr. Williams before starting any new routine.\n\nHere are three actionable steps:\n\n1. **Start with brisk walking:** Aim for 30 minutes most days of the week, as your recommendations suggest.  This is a low-impact exercise that's generally safe and effective for managing both blood pressure and blood sugar.  Gradually increase the duration and intensity as you feel comfortable.\n\n2. **Incorporate strength training:** Two days a week, try bodyweight exercises or light weights.  Strength training improves insulin sensitivity and helps manage blood pressure. Focus on major muscle groups.  Remember to start slowly and focus on proper form to avoid injuries.\n\n3. **Listen to your body:** Pay close attention to how you feel during and after exercise. If you experience dizziness, chest pain, or significant shortness of breath, stop immediately and consult your doctor.\n\n\nYour upcoming appointments with Dr. Johnson and Dr. Williams are perfect opportunities to discuss this further and get personalized guidance.  Remember that consistency is key!  Even small amounts of regular exercise are beneficial.  Let's work towards your health goals together!",
+      "timestamp": "2025-08-30T10:57:07.810759"
+    },
+    {
+      "id": 15,
+      "user_message": "When should I take my cholesterol medication?",
+      "ai_response": "Hi there!  It's great you're proactively managing your health.  I see from your profile that you're taking Atorvastatin 20mg once daily to help lower your cholesterol.  The best time to take Atorvastatin is usually **in the evening**.  This is because cholesterol production is highest at night, so taking it then can be most effective.\n\nHowever, it's always best to follow your doctor's specific instructions on when to take your medication.  Your medication list shows several entries for Metformin and Lisinopril; please double-check with your doctor or pharmacist to ensure you have the correct dosage and schedule for *all* your medications.  They can also clarify any potential interactions.\n\nTo help lower your cholesterol further, remember to maintain your heart-healthy diet and exercise routine as recommended.  I noticed your cholesterol levels have improved recently, that's fantastic progress!  Keep up the great work!  We can also discuss strategies for further improvements at our next session.  Remember, consistent effort makes a big difference.",
+      "timestamp": "2025-08-30T10:57:09.497208"
+    },
+    {
+      "id": 16,
+      "user_message": "What should I do if my blood sugar is too high?",
+      "ai_response": "Hi there! I see you're concerned about high blood sugar.  It's great that you're proactive about managing your health. Your recent fasting blood sugar readings show some fluctuation, ranging from 118mg/dL to 125mg/dL, which is generally within a controlled range, but still warrants attention.  Remember, consistently high blood sugar can have long-term health implications.\n\nGiven you're on Metformin, it's crucial to follow your doctor's advice carefully. Since your blood pressure is also slightly elevated (ranging from 135/85 to 140/90 mmHg), and you have high cholesterol (220 mg/dL previously, now 180mg/dL), managing your overall health is key.\n\nHere are three actionable steps you can take:\n\n1. **Strictly follow your medication regimen:** Take your Metformin and other medications exactly as prescribed by Dr. Johnson.  Consistency is crucial for managing both blood sugar and blood pressure.  \n\n2. **Review your diet:** Your doctor and I recommend a low-sodium, heart-healthy diet. Focus on incorporating more fruits, vegetables, and whole grains while limiting processed foods and saturated fats. This will benefit both your blood sugar and cholesterol levels.\n\n3. **Increase physical activity:** Aim for at least 30 minutes of moderate-intensity exercise most days of the week, as recommended.  This could be walking, swimming, or cycling.  Regular exercise helps regulate blood sugar.\n\nRemember, I'm an AI and cannot provide medical advice.  It's essential to discuss your concerns with Dr. Johnson at your upcoming appointments on September 15th and 20th.  They can assess your situation and make any necessary adjustments to your treatment plan.  Let's work together towards better health!",
+      "timestamp": "2025-08-30T10:57:12.383606"
+    },
+    {
+      "id": 17,
+      "user_message": "How often should I check my blood pressure?",
+      "ai_response": "Hi there!  It's great you're proactive about your health. I see from your profile that your blood pressure has been slightly elevated at times, ranging from 135/85 to 140/90 mmHg.  Your doctor has recommended monitoring it regularly.\n\nConsidering this, I suggest checking your blood pressure at least **three times a week**, ideally at the same time of day and before taking any medications. This will help you identify trends and patterns.\n\nTo make this easier:\n\n1. **Invest in a home blood pressure monitor:**  This allows for frequent, convenient readings.  Make sure it's calibrated correctly.\n2. **Keep a log:** Record your readings along with the date and time. This will be invaluable for your upcoming appointments with Dr. Johnson and Dr. Williams.  Bring this log to your appointments.\n3. **Discuss your readings with your doctor:**  Your upcoming appointments are perfect for reviewing your progress and adjusting your treatment plan if necessary.\n\nRemember, while monitoring is important,  it's crucial to discuss any concerns with your doctor. Don't hesitate to reach out if you have any questions or experience unusually high readings.  Let's work together to keep your blood pressure in a healthy range!",
+      "timestamp": "2025-08-30T10:57:14.494021"
+    },
+    {
+      "id": 18,
+      "user_message": "test",
+      "ai_response": "Hi there!  I see you have quite a few upcoming appointments, which is fantastic for managing your health.  Let's focus on a few key areas based on your recent health metrics.\n\nYour blood pressure has fluctuated between slightly and moderately elevated readings.  While your medications, including Lisinopril, aim to control this, consistent monitoring is key.  To help, let's aim for:\n\n1. **Regular BP Checks:**  Check your blood pressure twice a week at the same time of day, ideally in the morning before breakfast and record the readings.  Bring this information to your upcoming appointments.\n2. **Dietary Adjustments:** Since high cholesterol has been noted in previous tests (220 mg/dL), focus on a heart-healthy diet lower in saturated and trans fats. This complements your Atorvastatin.  Try swapping processed foods for more fruits, vegetables, and lean proteins.\n\nYour blood sugar levels seem well-managed, thanks to your Metformin.  Keep up the great work with your regular monitoring and adherence to your medication schedule.\n\nRemember to discuss any concerns, especially the BP fluctuations, with Dr. Johnson and Dr. Williams at your upcoming appointments.  Don't hesitate to ask them any questions you may have regarding your medication or lifestyle changes.  We'll celebrate your progress together!",
+      "timestamp": "2025-08-30T11:01:08.009809"
+    },
+    {
+      "id": 19,
+      "user_message": "test",
+      "ai_response": "Hi there!  It's great to connect. I see you have several upcoming appointments, which is fantastic for proactive health management!  Let's focus on a few key areas based on your health profile.\n\nYour blood pressure has been fluctuating slightly above the ideal range.  To help manage this, let's prioritize two things:  1) **Strictly follow your Lisinopril prescription as directed.**  This medication helps lower blood pressure. 2)  **Start incorporating relaxation techniques** like deep breathing or meditation for 10-15 minutes daily to help manage stress, a common contributor to high blood pressure.  Remember to track your blood pressure regularly, as instructed by your doctor.\n\nYour cholesterol levels have improved from a high of 220mg/dL to a more normal 180mg/dL \u2013 that\u2019s wonderful progress!  To keep it trending downwards, remember to continue your Atorvastatin as prescribed and maintain a heart-healthy diet low in saturated and trans fats.  Prioritize your upcoming lab work on September 25th to monitor your progress.\n\n\nFinally, your blood sugar levels are generally well-controlled, but consistent monitoring is key.  Remember to follow your doctor\u2019s recommendation and continue checking your blood sugar regularly. Your upcoming appointments with Dr. Johnson provide an excellent opportunity to discuss any questions or concerns.  Let's celebrate these successes together! Remember, I'm here to support you every step of the way, but always consult your doctor for any serious health concerns.",
+      "timestamp": "2025-08-30T11:03:26.991890"
     }
   ]
 }
